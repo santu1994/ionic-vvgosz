@@ -1,0 +1,97 @@
+<!-- Slider -->
+<ion-card class="product-slider" *ngIf="productInfo">
+  <mat-chip-list>
+    <mat-chip color="primary" selected *ngIf="productInfo.is_charity">CHARITY</mat-chip>
+    <mat-chip color="accent" selected *ngIf="productInfo.featured">FEATURED</mat-chip>
+    <mat-chip color="warn" selected *ngIf="productInfo.hot_sale">HOT</mat-chip>
+  </mat-chip-list>
+  <!-- Price Discount -->
+  <!-- Price Discount -->
+  <mat-chip color="accent" class="price-discount" selected *ngIf="productInfo.offer_price">
+    {{ productInfo.discount_type == 'P' ? '' : '-' }}
+    {{ productInfo.offer_price }}
+    {{ productInfo.discount_type == 'P' ? '%' : '' }}
+  </mat-chip>
+  <!-- Slider -->
+  <ion-slides pager="true" [options]="sliderOpts" *ngIf="showSlides" class="product-details">
+    <ion-slide *ngFor="let images of productInfo.images">
+      <img [defaultImage]="'assets/images/bidzone-loader-img.png'"
+        [lazyLoad]="baseUrl +'uploads/images/product/'+ productInfo._id +'/'+ images " />
+    </ion-slide>
+  </ion-slides>
+  <!-- Content -->
+  <ion-grid class="p-h-0 price-grid">
+    <ion-row>
+      <!-- Product Description -->
+      <ion-col size="8" class="m-auto price-col">
+        <ion-grid class="p-0">
+          <ion-row>
+            <!-- Product Description -->
+            <ion-col size="6" class="p-15">
+              <!-- All Product  and Upcoming Price -->
+              <ion-text color="light" class="price">
+                <p *ngIf="productInfo.offer_price">
+                  {{ adminInfo.currency.symbol}}
+                  {{ productInfo.price | calPercentageFlat: [productInfo.offer_price, productInfo.discount_type] }}
+                </p>
+                <p class="offer-price" *ngIf="productInfo.offer_price">
+                  {{ adminInfo.currency.symbol}} {{ productInfo.price}}
+                </p>
+                <p *ngIf="!productInfo.offer_price">
+                  {{ adminInfo.currency.symbol}}
+                  {{ productInfo.price }}
+                </p>
+              </ion-text>
+
+              <ion-text color="light">
+                <p>Product Price</p>
+              </ion-text>
+            </ion-col>
+
+            <!-- Bid -->
+            <ion-col size="6" class="p-15" *ngIf="productInfo.status === 'live'">
+              <ion-text color="light">
+                <p>
+                  Live
+                </p>
+              </ion-text>
+              <a href="javascript:;" class="intro-banner-vdo-play-btn pinkBg">
+                <span class="ripple pinkBg"></span>
+                <span class="ripple pinkBg"></span>
+                <span class="ripple pinkBg"></span>
+              </a>
+            </ion-col>
+
+            <!-- Upcoming -->
+            <ion-col size="6" class="p-15" *ngIf="productInfo.status === 'upcoming' && !productInfo.is_order">
+              <ion-text color="light">
+                <span>
+                  <ion-icon name="time-outline"></ion-icon>
+                </span>
+                <p>
+                  <countdown
+                    [config]="{leftTime: productInfo.auction.left_date, formatDate: moreThan24Hours.formatDate, notify: 0}"
+                    (event)="counterEvent($event)">
+                  </countdown>
+                </p>
+              </ion-text>
+              <ion-text color="light">
+                <p>Start on</p>
+              </ion-text>
+            </ion-col>
+
+            <!-- Auction Closed -->
+            <ion-col size="6" class="p-15 v-center" *ngIf="productInfo.status == 'close'">
+              <ion-text color="light">
+                <p>
+                  Auction Closed
+                </p>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-card>

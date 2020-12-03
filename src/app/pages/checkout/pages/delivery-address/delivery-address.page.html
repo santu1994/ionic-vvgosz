@@ -1,0 +1,86 @@
+<ion-header>
+  <ion-toolbar class="dark-header">
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-back-button defaultHref='' color="light" icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Select Address</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Timeline -->
+  <ion-card class="timeline">
+    <ion-card-content>
+      <mat-horizontal-stepper labelPosition="bottom" #stepper [disableRipple]="true" [linear]="true">
+        <mat-step>
+          <ng-template matStepLabel>
+            Address
+          </ng-template>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Order Summary</ng-template>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Payment</ng-template>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Add Address -->
+  <ion-card class="add">
+    <ion-item lines="none" (click)="addressModel()">
+      <ion-label color="primary" class="font-weight-700">Add a new address</ion-label>
+      <ion-icon name="add-outline" slot="start" color="primary"></ion-icon>
+    </ion-item>
+  </ion-card>
+
+  <!-- Delivery Address -->
+  <ng-container *ngIf="addressList.length > 0">
+    <ion-radio-group [value]="selectAddress._id" (ionChange)="selectEvent($event)">
+      <ion-card class="address" *ngFor="let address of addressList">
+        <ion-item lines="none">
+          <ion-label class="ion-text-wrap">
+            <div class="header">
+              <ion-text color="dark">
+                <p class="font-weight-700">{{address.name}}</p>
+              </ion-text>
+              <ion-chip>
+                <ion-label>{{address.type==='H'? 'Home': 'Work'}}</ion-label>
+              </ion-chip>
+
+              <ion-button shape="round" class="float-right" (click)="addressModel(address)">Edit</ion-button>
+            </div>
+
+            <ion-text>
+              <p>
+                {{address.address}}
+                {{(address.city) ? ', '+ address.city : '' }}
+                {{(address.state)? ', '+ address.state : ''}}
+                {{(address.pin)? ' - '+ address.pin : ''}}
+              </p>
+            </ion-text>
+            <ion-text>
+              <ion-chip color="primary">
+                <ion-icon name="call-outline"></ion-icon>
+                <ion-label class="default-font">{{address.phone}}</ion-label>
+              </ion-chip>
+              <ion-chip color="primary" *ngIf="address.alter_phone">
+                <ion-icon name="call-outline"></ion-icon>
+                <ion-label class="default-font">{{address.alter_phone}}</ion-label>
+              </ion-chip>
+            </ion-text>
+          </ion-label>
+          <ion-radio slot="start" [value]="address._id"></ion-radio>
+        </ion-item>
+      </ion-card>
+    </ion-radio-group>
+  </ng-container>
+</ion-content>
+
+<ion-footer class="ion-no-border">
+  <ion-toolbar>
+    <ion-button expand="full" class="m-0 font-weight-700" color="warning" (click)="delivery()">Delivery Here
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

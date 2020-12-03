@@ -1,0 +1,98 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-card.product-live-auction {
+  border-radius: 10px;
+  box-shadow: none;
+  ion-col {
+    &:first-child {
+      ion-col {
+        button {
+          height: 50px;
+          width: 50px;
+          @include media(380px) {
+            & {
+              height: 42px;
+              width: 42px;
+            }
+          }
+          .mat-icon {
+            font-size: 30px;
+            @include media(380px) {
+              & {
+                font-size: 24px;
+                line-height: 20px;
+              }
+            }
+          }
+        }
+        ion-text {
+          p {
+            margin-left: 10px;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 0px;
+            &:last-child {
+              font-weight: 700;
+              color: var(--ion-color-medium);
+            }
+            @include media(380px) {
+              & {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+      ion-progress-bar {
+        border-radius: 10px;
+      }
+    }
+    &:last-child {
+      ion-col {
+        &:first-child {
+          margin-bottom: 0px;
+          ion-text {
+            p {
+              display: inline;
+              margin-left: 10px;
+              font-size: 18px;
+              font-weight: 700;
+              vertical-align: top;
+              margin-right: 5px;
+              @include media(380px) {
+                & {
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+
+        &:last-child {
+          margin-top: -2px;
+          ion-text {
+            ion-icon {
+              margin-left: 20px;
+              margin-right: 5px;
+              font-size: 24px;
+            }
+          }
+          countdown {
+            font-size: 23px;
+            font-weight: 700;
+            vertical-align: super;
+            @include media(380px) {
+              & {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

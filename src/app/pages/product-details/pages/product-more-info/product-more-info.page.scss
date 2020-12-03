@@ -1,0 +1,29 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-card.product-more-details {
+  border-radius: 10px;
+  box-shadow: none;
+  padding-left: 10px;
+  ion-text {
+    p {
+      margin: 0px;
+      font-weight: 600;
+      display: inline;
+      font-size: 16px;
+      ion-icon {
+        font-size: 22px;
+        vertical-align: middle;
+        float: right;
+      }
+      @include media(380px) {
+        & {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}

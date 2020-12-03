@@ -1,0 +1,181 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-header.more-product-header {
+  ion-toolbar {
+    --background: #084b44;
+  }
+}
+
+ion-content.more-product {
+  ion-card {
+    &.product {
+      margin: 0px;
+      ion-grid {
+        padding: 0px;
+        ion-col {
+          padding-right: 5px;
+          div {
+            height: 50px;
+            ion-img {
+              height: inherit;
+              margin: auto !important;
+              display: block;
+            }
+          }
+          ion-text {
+            h4 {
+              font-weight: 700;
+              font-size: 17px;
+              margin: 0px;
+              @include media(380px) {
+                & {
+                  font-size: 14px;
+                }
+              }
+            }
+            &.price {
+              h3 {
+                font-weight: 700;
+                font-size: 20px;
+                margin: 0px;
+                margin-right: 10px;
+                display: inline;
+                font-family: Open Sans, -apple-system, BlinkMacSystemFont,
+                  Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif !important;
+                @include media(380px) {
+                  & {
+                    font-size: 16px;
+                  }
+                }
+              }
+              h4 {
+                display: inline;
+                color: var(--ion-color-medium);
+                margin-right: 10px;
+                text-decoration: line-through;
+                font-family: Open Sans, -apple-system, BlinkMacSystemFont,
+                  Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif !important;
+              }
+              h5 {
+                display: inline;
+                color: var(--ion-color-medium);
+                margin-right: 10px;
+                font-family: Open Sans, -apple-system, BlinkMacSystemFont,
+                  Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif !important;
+              }
+              ion-badge {
+                vertical-align: middle;
+                font-family: Open Sans, -apple-system, BlinkMacSystemFont,
+                  Segoe UI, Roboto, Helvetica Neue, Arial, sans-serif !important;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.product-info {
+      margin: 10px 0px;
+      ion-text {
+        &.description {
+          p {
+            @include media(380px) {
+              & {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+        &.variant {
+          display: block;
+          p {
+            display: inline;
+            font-size: 18px;
+            font-weight: 700;
+            @include media(380px) {
+              & {
+                font-size: 12px;
+              }
+            }
+            &:first-child {
+              color: var(--ion-color-primary);
+            }
+          }
+        }
+        &.quantity {
+          display: block;
+          p {
+            display: inline;
+            font-size: 18px;
+            font-weight: 700;
+            @include media(380px) {
+              & {
+                font-size: 12px;
+              }
+            }
+            &:first-child {
+              color: var(--ion-color-dark);
+            }
+          }
+        }
+        &.seller-details {
+          h4 {
+            font-size: 30px;
+            font-weight: 700;
+            color: var(--ion-color-secondary);
+          }
+          p {
+            font-size: 18px;
+            font-weight: 700;
+            @include media(380px) {
+              & {
+                font-size: 14px;
+              }
+            }
+            span {
+              font-weight: 500;
+              color: var(--ion-color-dark);
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+:host ::ng-deep .mat-tab-label,
+:host ::ng-deep .mat-tab-link {
+  color: #009688;
+  padding: 0px 2px;
+  @include media(380px) {
+    & {
+      font-size: 12px;
+    }
+  }
+}
+:host ::ng-deep .mat-tab-label-active {
+  /* background: gainsboro; */
+  background: aliceblue;
+  opacity: 1 !important;
+}
+
+/* ------------ Product Description ---------- */
+:host ::ng-deep .product-description {
+  .table {
+    margin: 0px;
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      td,
+      th {
+        border: 1px solid #ddd;
+      }
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+<ion-card class="product-auction" *ngIf="productInfo.auction">
+  <ion-card-content>
+    <ion-grid class="p-0">
+      <ion-row>
+        <!-- Price increment -->
+        <ion-col size="4">
+          <ion-text color="dark">
+            <p class="title"> {{ adminInfo.currency.symbol}} {{productInfo.auction_type[0].increment_slab}}</p>
+          </ion-text>
+          <ion-text color="medium">
+            <p class="sub-title">Price increment</p>
+          </ion-text>
+        </ion-col>
+        <!-- Bid cost -->
+        <ion-col size="4">
+          <ion-text color="dark">
+            <p class="title">{{productInfo.auction.required_bid_credit }}x</p>
+          </ion-text>
+          <ion-text color="medium">
+            <p class="sub-title">Bid cost</p>
+          </ion-text>
+        </ion-col>
+        <!-- Auction Id -->
+        <ion-col size="4">
+          <ion-text color="dark">
+            <p class="title">{{productInfo.auction.auction_id}}</p>
+          </ion-text>
+          <ion-text color="medium">
+            <p class="sub-title">Auction ID</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

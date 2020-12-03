@@ -1,0 +1,174 @@
+<ion-header>
+  <ion-toolbar class="dark-header">
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-back-button defaultHref='' color="light" icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Order Summary</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Timeline -->
+  <ion-card class="timeline">
+    <ion-card-content>
+      <mat-horizontal-stepper labelPosition="bottom" #stepper [disableRipple]="true" [linear]="true">
+        <ng-template matStepperIcon="edit">
+          <mat-icon>done</mat-icon>
+        </ng-template>
+        <mat-step>
+          <ng-template matStepLabel>
+            Address
+          </ng-template>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Order Summary</ng-template>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>Payment</ng-template>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </ion-card-content>
+  </ion-card>
+  <!-- Delivery Address -->
+  <ion-card class="address" *ngIf="!addressLoader">
+    <ion-card-content *ngIf="selectAddress">
+      <div class="header">
+        <ion-text color="dark">
+          <p class="font-weight-700">{{selectAddress.name}}</p>
+        </ion-text>
+        <ion-chip>
+          <ion-label>{{selectAddress.type==='H'? 'Home': 'Work'}}</ion-label>
+        </ion-chip>
+      </div>
+
+      <ion-text>
+        <p>
+          {{selectAddress.address}}
+          {{(selectAddress.city) ? ', '+ selectAddress.city : '' }}
+          {{(selectAddress.state)? ', '+ selectAddress.state : ''}}
+          {{(selectAddress.pin)? ' - '+ selectAddress.pin : ''}}
+        </p>
+      </ion-text>
+      <ion-text>
+        <ion-chip color="primary">
+          <ion-icon name="call-outline"></ion-icon>
+          <ion-label class="default-font">{{selectAddress.phone}}</ion-label>
+        </ion-chip>
+        <ion-chip color="primary" *ngIf="selectAddress.alter_phone">
+          <ion-icon name="call-outline"></ion-icon>
+          <ion-label class="default-font">{{selectAddress.alter_phone}}</ion-label>
+        </ion-chip>
+      </ion-text>
+    </ion-card-content>
+    <ion-button expand="full" (click)="viewAddressModal()">Change or Add Address</ion-button>
+  </ion-card>
+  <!-- loader -->
+  <ion-card class="address" *ngIf="addressLoader">
+    <ion-skeleton-text animated style="height: 150px; margin: 0;"></ion-skeleton-text>
+  </ion-card>
+  <!-- Product -->
+  <ion-card class="product" *ngFor="let item of [0,1,3]">
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="3" class="v-center">
+            <div class="image">
+              <ion-img
+                [src]="'https://bidzone.ml/uploads/images/product//5f1a69fde480075d3b4315bc/image-1595572294297.jpeg'">
+              </ion-img>
+            </div>
+          </ion-col>
+          <ion-col size="9">
+            <ion-text color="primary">
+              <h4>Nintendo Switch</h4>
+            </ion-text>
+            <div class="d-block">
+              <ion-chip color="primary">
+                <ion-label>Red</ion-label>
+              </ion-chip>
+              <ion-chip color="primary">
+                <ion-label>2 GB</ion-label>
+              </ion-chip>
+            </div>
+            <ion-text color="dark" class="price">
+              <h3>RS - 20</h3>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <!-- Price -->
+  <ion-card class="price">
+    <ion-card-header>
+      <ion-card-subtitle>PRICE DETAILS</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <!-- Price -->
+          <ion-col size="8">
+            <ion-text color="dark">
+              <h3 class="m-b-0">Price</h3>
+            </ion-text>
+          </ion-col>
+          <ion-col size="4">
+            <ion-text color="dark">
+              <h3 class="m-b-0 float-right">Rs 60</h3>
+            </ion-text>
+          </ion-col>
+          <!-- Delivery -->
+          <ion-col size="8">
+            <ion-text color="dark">
+              <h3 class="m-b-0">Delivery</h3>
+            </ion-text>
+          </ion-col>
+          <ion-col size="4">
+            <ion-text color="primary">
+              <h3 class="m-b-0 float-right">FREE</h3>
+            </ion-text>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+    <!-- Total Amount -->
+    <ion-item lines="none">
+      <ion-grid>
+        <ion-col size="8">
+          <h3 class="m-b-0 font-weight-600 d-inline">Amount Payable</h3>
+        </ion-col>
+        <ion-col size="4">
+          <h3 class="m-b-0 font-weight-600 d-inline float-right">RS 60</h3>
+        </ion-col>
+      </ion-grid>
+    </ion-item>
+  </ion-card>
+
+  <!-- Text -->
+  <ion-list class="message">
+    <ion-item lines="none">
+      <ion-icon name="shield-checkmark-outline" slot="start"></ion-icon>
+      <ion-label class="ion-text-wrap font-weight-600" color="medium">
+        Safe and Secure Payments.Easy returns. 100% Authentic products
+      </ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-item lines="none">
+      <ion-label>
+        <ion-text>
+          <h2 class="font-weight-600 default-font m-0">RS 130</h2>
+        </ion-text>
+        <ion-text color="primary">
+          <p class="m-0">View price details</p>
+        </ion-text>
+      </ion-label>
+      <ion-button slot="end" color="warning" (click)="viewPaymentModal()">
+        Continue
+      </ion-button>
+    </ion-item>
+  </ion-toolbar>
+</ion-footer>

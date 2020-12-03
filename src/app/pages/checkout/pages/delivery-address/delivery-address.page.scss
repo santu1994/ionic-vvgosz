@@ -1,0 +1,96 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-card {
+  // Timeline
+  &.timeline {
+    margin: 0;
+    margin-bottom: 10px;
+    border-radius: 0;
+  }
+  // Add Address
+  &.add {
+    margin: 0;
+    margin-bottom: 10px;
+    border-radius: 0;
+    ion-item {
+      ion-icon {
+        margin-inline-end: 15px;
+      }
+    }
+  }
+  //   Address
+  &.address {
+    margin: 0;
+    margin-bottom: 10px;
+    border-radius: 0;
+    .header {
+      ion-text {
+        p {
+          font-size: 17px;
+          display: inline;
+        }
+      }
+    }
+    ion-button {
+      margin: 0px !important;
+    }
+  }
+}
+
+ion-footer {
+  ion-toolbar {
+    --min-height: auto !important;
+    ion-button {
+      height: 45px;
+      font-size: 17px;
+    }
+  }
+}
+::ng-deep mat-horizontal-stepper {
+  mat-step-header {
+    padding: 0px !important;
+  }
+}
+
+::ng-deep .mat-stepper-label-position-bottom .mat-stepper-horizontal-line {
+  top: 12px !important;
+}
+
+::ng-deep
+  .mat-stepper-label-position-bottom
+  .mat-horizontal-stepper-header:not(:last-child)::after {
+  top: 12px !important;
+}
+
+::ng-deep
+  .mat-stepper-label-position-bottom
+  .mat-horizontal-stepper-header:not(:first-child)::before {
+  top: 12px !important;
+}
+
+::ng-deep
+  .mat-stepper-label-position-bottom
+  .mat-horizontal-stepper-header
+  .mat-step-label {
+  padding: 8px 0 0 0 !important;
+}
+
+::ng-deep .mat-horizontal-content-container {
+  padding: 0 !important;
+}
+
+::ng-deep .mat-step-label {
+  font-weight: 700;
+}
+
+::ng-deep .mat-step-label-selected {
+  color: var(--ion-color-primary) !important;
+}
+
+::ng-deep .mat-horizontal-stepper-header {
+  pointer-events: none !important;
+}

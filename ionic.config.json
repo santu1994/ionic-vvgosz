@@ -1,0 +1,7 @@
+{
+  "name": "bidzone",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

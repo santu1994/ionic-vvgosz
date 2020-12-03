@@ -1,0 +1,83 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-header {
+  ion-toolbar {
+    ion-title {
+      padding: 2px;
+    }
+    ion-button {
+      @include media(380px) {
+        & {
+          font-size: 12px;
+        }
+      }
+    }
+  }
+}
+
+ion-card {
+  &.list {
+    margin: 0px;
+    border-radius: 0px;
+    box-shadow: none;
+    ion-list {
+      padding-top: 0px;
+      padding-bottom: 20px;
+      ion-item {
+        --padding-end: 16px;
+        --inner-padding-end: 0px;
+        ion-icon {
+          margin-right: 10px;
+        }
+        ion-label {
+          @include media(380px) {
+            & {
+              margin-bottom: 4px;
+              margin-top: 4px;
+            }
+          }
+          ion-col {
+            &:first-child {
+              ion-text {
+                p {
+                  margin: 0px;
+                  &:first-child {
+                    font-size: 16px;
+                    font-weight: 500;
+                    margin-bottom: 5px;
+                    color: var(--ion-color-dark);
+                    @include media(380px) {
+                      & {
+                        font-size: 14px;
+                        margin-bottom: 0px;
+                      }
+                    }
+                  }
+                  @include media(380px) {
+                    & {
+                      font-size: 12px;
+                    }
+                  }
+                }
+              }
+            }
+            &:last-child {
+              justify-content: flex-end;
+              ion-text {
+                p {
+                  margin: 0px;
+                  font-size: 18px;
+                  font-weight: 500;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

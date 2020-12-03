@@ -1,0 +1,103 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-content {
+  &.address-content {
+    ion-card {
+      margin-left: 0px;
+      margin-right: 0px;
+      box-shadow: none;
+      border-radius: 0px;
+      &.add {
+        margin-top: 0px;
+        ion-text {
+          ion-icon {
+            vertical-align: middle;
+            font-size: 25px;
+            @include media(380px) {
+              & {
+                font-size: 22px;
+              }
+            }
+          }
+          p {
+            display: inline;
+            margin: 0px;
+            margin-left: 10px;
+            font-size: 17px;
+            font-weight: 700;
+            @include media(380px) {
+              & {
+                font-size: 15px;
+              }
+            }
+          }
+        }
+      }
+      &.address {
+        ion-card-header {
+          @include media(380px) {
+            & {
+              padding-top: 10px;
+              padding-bottom: 10px;
+            }
+          }
+          ion-card-title {
+            ion-text {
+              p {
+                display: inline;
+                margin: 0px;
+                @include media(380px) {
+                  & {
+                    font-size: 17px;
+                  }
+                }
+              }
+            }
+            button {
+              float: right;
+            }
+            ion-chip {
+              ion-label {
+                @include media(380px) {
+                  & {
+                    font-size: 12px;
+                  }
+                }
+              }
+            }
+          }
+        }
+        ion-card-content {
+          @include media(380px) {
+            & {
+              padding-bottom: 10px;
+            }
+          }
+          ion-text {
+            p {
+              @include media(380px) {
+                & {
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+          ion-chip {
+            ion-label {
+              font: 600 14px/20px Roboto, "Helvetica Neue", sans-serif;
+              @include media(380px) {
+                & {
+                  font-size: 12px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-tab-button {
+  ion-text {
+    font-size: 26px;
+    @include media(380px) {
+      & {
+        font-size: 22px;
+      }
+    }
+  }
+  ion-label {
+    font-size: 15px;
+    font-weight: 700;
+    @include media(380px) {
+      & {
+        font-size: 12px;
+      }
+    }
+  }
+}

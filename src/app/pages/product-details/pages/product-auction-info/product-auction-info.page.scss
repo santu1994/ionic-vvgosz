@@ -1,0 +1,36 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+ion-card.product-auction {
+  margin: 10px 25px;
+  box-shadow: none;
+  background: transparent;
+  ion-card-content {
+    padding: 0px;
+    ion-col {
+      padding: 0px;
+      ion-text {
+        p {
+          text-align: center;
+          margin: 0px;
+          font-weight: 700;
+          @include media(380px) {
+            & {
+              font-size: 11px;
+            }
+          }
+          &.title {
+            font-size: 23px;
+            @include media(380px) {
+              & {
+                font-size: 18px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

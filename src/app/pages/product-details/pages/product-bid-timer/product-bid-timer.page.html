@@ -1,0 +1,15 @@
+<ion-card class="product-bid-timer" *ngIf="productInfo.auction">
+  <ion-card-content class="p-5">
+    <ion-text color="dark">
+      <p class="icon">
+        <ion-icon name="information-circle-outline"></ion-icon>
+      </p>
+      <p>
+        Each bid reverts the timer back to
+      </p>
+      <p class="timer">
+        {{productInfo.auction.reset_time}} seconds
+      </p>
+    </ion-text>
+  </ion-card-content>
+</ion-card>

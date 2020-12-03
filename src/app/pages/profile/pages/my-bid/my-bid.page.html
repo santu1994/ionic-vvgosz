@@ -1,0 +1,92 @@
+<ion-header>
+  <ion-toolbar class="dark-header">
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-back-button defaultHref='' color="light" icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">My Bid</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="my-bid-product">
+  <!-- Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ng-container *ngIf="!loading">
+    <ion-card class="product" *ngFor="let item of BidList;" (click)="viewProductDetailsModal(item.bid.product_id)">
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3" class="v-center">
+              <div *ngIf="item.product.images.length > 0">
+                <ion-img [src]="baseUrl +item.bid.product_id +'/'+item.product.images[0]"></ion-img>
+              </div>
+
+              <ion-chip color="warning" class="winner"
+                *ngIf="(item.product.last_bid_customer_id === this.customerInfo._id) && (getTimeZoneConvert(currentDate) > getTimeZoneConvert(item.product.auction_end_date))">
+                <ion-icon name="trophy"></ion-icon>
+                <ion-label>WINNER</ion-label>
+              </ion-chip>
+
+            </ion-col>
+            <ion-col size="9">
+              <ion-text color="primary">
+                <h4>{{ item.product.name| truncate:[80] }} </h4>
+              </ion-text>
+              <!-- bid -->
+              <ion-text color="warning" class="bid">
+                <p>{{item.total}} x {{item.product.required_bid_credit}} <mat-icon>grade</mat-icon>
+                </p>
+              </ion-text>
+              <!-- Price -->
+              <ion-text color="dark" class="price">
+                <h3>{{ adminInfo.currency.symbol}} {{item.bid.price}}
+                  <span>(Last Bid)</span>
+                </h3>
+              </ion-text>
+              <!-- Date -->
+              <ion-text color="medium" class="date">
+                <p class="m-0">{{getTimeZoneConvert(item.bid.createdAt) | date:'dd LLL yyyy HH:mm'}}</p>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..." color="primary">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ng-container>
+  <!-- Loader -->
+  <ng-container *ngIf="loading">
+    <ion-card class="product" *ngFor="let item of [0,1,3]">
+      <ion-card-content>
+        <ion-list>
+          <ion-item lines="none">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+
+
+
+
+  </ng-container>
+</ion-content>

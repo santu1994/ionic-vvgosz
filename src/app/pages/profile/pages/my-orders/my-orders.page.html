@@ -1,0 +1,85 @@
+<ion-header>
+  <ion-toolbar class="dark-header">
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-back-button defaultHref='' color="light" icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">My Orders</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="my-orders-product">
+  <!-- Refresh -->
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ng-container *ngIf="!loading">
+    <ion-card class="product" *ngFor="let item of orderList" (click)="viewTracingHistoryModal(item)">
+      <ion-card-content class="p-b-0">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="3" class="v-center">
+              <div *ngIf="item.products_info.images.length > 0">
+                <ion-img [src]="baseUrl +item.products_info._id +'/'+item.products_info.images[0]"></ion-img>
+              </div>
+            </ion-col>
+            <ion-col size="9">
+              <ion-text color="primary">
+                <h4>{{ item.products_info.name| truncate:[80] }}</h4>
+              </ion-text>
+              <ion-chip color="primary" *ngFor="let variant of item.products_info.variant">
+                <ion-label>{{  variant.slug  }}</ion-label>
+              </ion-chip>
+              <ion-text color="secondary">
+                <h4> #Order Id: <span class="default-font">{{item.order_group_id}}</span></h4>
+              </ion-text>
+              <ion-text color="dark" class="price">
+                <h3>{{ adminInfo.currency.symbol}} {{ item.paid_amount}}</h3>
+              </ion-text>
+              <ion-text color="medium" class="date">
+                <p class="m-0">{{getTimeZoneConvert(item.createdAt)  | date:'dd LLL yyyy HH:mm'}}</p>
+              </ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+      <ion-item lines="none" class="tracking">
+        <ion-icon name="locate-outline" slot="start" color="primary"></ion-icon>
+        <ion-label color="primary" class="font-weight-700">
+          {{item.history_details[item.history_details.length - 1].order_status_id.description}}
+        </ion-label>
+      </ion-item>
+    </ion-card>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+      <ion-infinite-scroll-content loadingSpinner="bubbles" loadingText="Loading more data..." color="primary">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+  </ng-container>
+
+  <!-- Loader -->
+  <ng-container *ngIf="loading">
+    <ion-card class="product" *ngFor="let item of [0,1,3]">
+      <ion-card-content>
+        <ion-list>
+          <ion-item lines="none">
+            <ion-thumbnail slot="start">
+              <ion-skeleton-text animated></ion-skeleton-text>
+            </ion-thumbnail>
+            <ion-label>
+              <h3>
+                <ion-skeleton-text animated style="width: 70%"></ion-skeleton-text>
+              </h3>
+              <p>
+                <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+              </p>
+              <p>
+                <ion-skeleton-text animated style="width: 80%"></ion-skeleton-text>
+              </p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ion-content>

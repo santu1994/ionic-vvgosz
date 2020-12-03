@@ -1,0 +1,26 @@
+<ion-content>
+  <!-- Image -->
+  <img src="assets/images/order.png">
+  <!-- Animation -->
+  <div class="success-checkmark">
+    <div class="check-icon">
+      <span class="icon-line line-tip"></span>
+      <span class="icon-line line-long"></span>
+      <div class="icon-circle"></div>
+      <div class="icon-fix"></div>
+    </div>
+  </div>
+  <!-- Message -->
+  <ion-text color="primary" class="successfully-text">
+    <h1>Your order has been placed</h1>
+  </ion-text>
+  <!-- Card -->
+  <ion-card class="shopping">
+    <ion-item (click)="closeModal()" lines="none">
+      <ion-label color="primary" class="font-weight-700">
+        CONTINUE SHOPPING
+      </ion-label>
+      <ion-icon name="arrow-forward-outline" size="large" slot="end" color="primary"></ion-icon>
+    </ion-item>
+  </ion-card>
+</ion-content>

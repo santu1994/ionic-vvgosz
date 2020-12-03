@@ -1,0 +1,153 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <!-- Top Bar -->
+    <app-header [headerData]="headerData"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="customerInfo">
+  <ion-card class="profile-header">
+    <ion-card-content>
+      <ion-avatar>
+        <img class="brand-logo" alt="modern admin logo" src="assets/images/avatar.png" *ngIf="!customerInfo.image">
+        <img [src]="baseUrl +'/'+customerInfo._id+'/'+ customerInfo.image" *ngIf="customerInfo.image">
+      </ion-avatar>
+      <ion-text>
+        <h2>{{customerInfo.name}}</h2>
+        <p>{{customerInfo.email}}</p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- My Order -->
+  <ion-card class="profile-card">
+    <ion-item>
+      <ion-label color="primary">
+        <ion-text>
+          <p>My Orders</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-card-content (click)="viewMyOrderModal()">
+      <ion-text color="warning">
+        <p>
+          View All
+        </p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Bid Balance -->
+  <!-- <ion-card class="profile-card">
+    <ion-item>
+      <ion-label color="primary">
+        <ion-text>
+          <p>Bid Balance</p>
+        </ion-text>
+      </ion-label>
+      <ion-chip color="primary" slot="end" class="m-0">
+        <ion-label>220</ion-label>
+      </ion-chip>
+    </ion-item>
+
+    <ion-card-content (click)="viewBidBalanceModal()">
+      <ion-text color="warning">
+        <p>
+          Bid Statement
+        </p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card> -->
+
+  <!-- My Bid -->
+  <ion-card class="profile-card">
+    <ion-item>
+      <ion-label color="primary">
+        <ion-text>
+          <p>My Bid</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-card-content (click)="viewMyBidModal()">
+      <ion-text color="warning">
+        <p>
+          View all
+        </p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- My Address -->
+  <ion-card class="profile-card">
+    <ion-item>
+      <ion-label color="primary">
+        <ion-text>
+          <p> My Address
+            <ion-spinner name="dots" class="float-right" *ngIf="loader.address"></ion-spinner>
+          </p>
+          <p *ngFor="let address of addressList">
+            <ng-container *ngIf="address.is_default">
+              {{address.address}}
+              {{(address.city) ? ', '+ address.city : '' }}
+              {{(address.state)? ', '+ address.state : ''}}
+              {{(address.pin)? ' - '+ address.pin : ''}}
+            </ng-container>
+          </p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-card-content (click)="viewMyAddressModal()">
+      <ion-text color="warning">
+        <p>
+          View
+        </p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Edit Profile -->
+  <ion-card class="profile-card">
+    <ion-item>
+      <ion-label color="primary">
+        <ion-text>
+          <p> Edit Profile</p>
+        </ion-text>
+      </ion-label>
+    </ion-item>
+
+    <ion-card-content (click)="viewEditProfileModal()">
+      <ion-text color="warning">
+        <p>
+          View
+        </p>
+      </ion-text>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- list -->
+  <ion-card class="list">
+    <ion-list>
+      <ion-item class="ion-activatable ripple-parent">
+        <ion-label>
+          <ion-text>
+            <ion-icon name="notifications-outline"></ion-icon>
+            <p>Notification</p>
+          </ion-text>
+        </ion-label>
+        <ion-ripple-effect></ion-ripple-effect>
+      </ion-item>
+      <ion-item class="ion-activatable ripple-parent">
+        <ion-label (click)="logout()">
+          <ion-text>
+            <ion-icon name="log-out-outline" class="flip-icon"></ion-icon>
+            <p>Logout</p>
+          </ion-text>
+        </ion-label>
+        <ion-ripple-effect></ion-ripple-effect>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

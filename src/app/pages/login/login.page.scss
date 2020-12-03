@@ -1,0 +1,131 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-content {
+  --background: var(--ion-color-light);
+}
+
+ion-row.content-body {
+  padding-left: 20px;
+  padding-right: 20px;
+  ion-text {
+    &.title h2 {
+      font-family: var(--ion-font-family);
+      font-weight: 700;
+      font-size: 35px;
+      color: var(--ion-color-medium);
+      text-align: center;
+      display: inline-block;
+      &.company-first {
+        padding-left: 5px;
+        color: var(--ion-color-primary);
+      }
+      &.company-surname {
+        color: var(--ion-color-warning);
+      }
+      @include media(380px) {
+        & {
+          font-size: 26px;
+        }
+      }
+    }
+    &.forgot-password p {
+      font-weight: 400;
+      font-size: 20px;
+      text-align: right;
+      padding-left: 5px;
+      padding-right: 5px;
+      margin: 0px;
+      @include media(380px) {
+        & {
+          font-size: 14px;
+        }
+      }
+    }
+    &.register-text h2 {
+      width: 100%;
+      text-align: center;
+      border-bottom: 1px solid #b0bcca;
+      line-height: 0.1em;
+      margin: 10px 0 20px;
+      span {
+        background: var(--ion-color-light);
+        padding: 0 10px;
+      }
+    }
+    &.footer-tittle p {
+      font-size: 20px;
+      text-align: center;
+      span {
+        font-weight: 500;
+        font-size: 21px;
+        color: #152a4cc7;
+        @include media(380px) {
+          & {
+            font-size: 15px;
+          }
+        }
+      }
+      @include media(380px) {
+        & {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+
+  ::ng-deep .form-field {
+    width: 100%;
+    .mat-input-element {
+      font-weight: 700;
+      font-size: 21px;
+      color: #152a4cc7;
+      letter-spacing: 1px;
+      @include media(380px) {
+        & {
+          font-size: 17px;
+        }
+      }
+    }
+    mat-label {
+      font-size: 20px;
+      @include media(380px) {
+        & {
+          font-size: 16px;
+        }
+      }
+    }
+    .mat-form-field-underline {
+      height: 1px;
+      color: var(--ion-color-medium);
+    }
+    button.mat-icon-button {
+      font-size: 27px;
+      color: var(--ion-color-medium);
+      @include media(380px) {
+        & {
+          font-size: 24px;
+        }
+      }
+    }
+  }
+
+  ion-button {
+    margin-left: 0px;
+    margin-right: 0px;
+    --border-radius: 50px;
+    font-size: 20px;
+    font-weight: 700;
+    &.sign-in {
+      margin-top: 14px;
+    }
+    @include media(380px) {
+      & {
+        font-size: 16px;
+      }
+    }
+  }
+}

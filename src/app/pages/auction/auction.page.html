@@ -1,0 +1,29 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <!-- Top Bar -->
+    <app-header [headerData]="headerData"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="content-body" padding="true">
+  <!-- Product List -->
+  <ng-container *ngIf="!isLoadingResults">
+    <!-- Upcoming -->
+    <app-product-list *ngFor="let product of upcomingProductData" [adminInfo]="adminInfo" [product]="product"
+      (countEvent)="counterEvent($event)">
+    </app-product-list>
+    <!-- Live -->
+    <app-product-list *ngFor="let product of liveProductData" [adminInfo]="adminInfo" [product]="product"
+      (countEvent)="counterEvent($event)">
+    </app-product-list>
+    <!-- Close -->
+    <app-product-list *ngFor="let product of closeProductData" [adminInfo]="adminInfo" [product]="product"
+      (countEvent)="counterEvent($event)">
+    </app-product-list>
+  </ng-container>
+
+  <!-- Loader -->
+  <ng-container *ngIf="isLoadingResults">
+    <app-product-list></app-product-list>
+  </ng-container>
+</ion-content>

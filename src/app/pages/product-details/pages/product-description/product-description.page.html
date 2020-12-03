@@ -1,0 +1,12 @@
+<ion-card class="product-detail">
+  <ion-card-header>
+    <ion-card-title class="text-bold" color="primary">{{productInfo.name}}</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <ion-text color="medium">
+      <p>
+        {{productInfo.short_description | truncate:[200]}}
+      </p>
+    </ion-text>
+  </ion-card-content>
+</ion-card>

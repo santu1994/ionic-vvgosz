@@ -1,0 +1,16 @@
+<ion-card class="product-variant" *ngIf="productInfo.variant.length > 0">
+  <ion-card-content>
+    <ion-grid class="p-0">
+      <ion-row>
+        <ion-col size="4" *ngFor="let variant of productInfo.variant">
+          <ion-text color="dark">
+            <p class="title">{{variant.slug}}</p>
+          </ion-text>
+          <ion-text color="medium">
+            <p class="sub-title">{{variant.attribute}}</p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>

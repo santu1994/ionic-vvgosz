@@ -1,0 +1,50 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-header ion-toolbar,
+ion-content {
+  --background: #ffffff;
+}
+
+ion-slides {
+  --bullet-background-active: var(--ion-color-warning);
+  ion-slide {
+    ion-text {
+      &.into-title h1 {
+        font-family: var(--ion-font-family);
+        font-size: 35px;
+        font-weight: 900;
+        @include media(380px) {
+          & {
+            font-size: 29px;
+          }
+        }
+      }
+      &.into-description p {
+        color: var(--ion-color-medium);
+        font-size: 23px;
+        line-height: 1.2;
+        @include media(380px) {
+          & {
+            font-size: 19px;
+          }
+        }
+      }
+    }
+    .skip-btn {
+      position: absolute;
+      bottom: 10px;
+      right: 35px;
+      font-size: 23px;
+      padding: 20px 20px 0px;
+      @include media(380px) {
+        & {
+          font-size: 19px;
+        }
+      }
+    }
+  }
+}

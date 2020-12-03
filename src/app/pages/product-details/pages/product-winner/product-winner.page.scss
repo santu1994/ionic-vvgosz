@@ -1,0 +1,44 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-card.product-winner {
+  border-radius: 10px;
+  box-shadow: none;
+  ion-col {
+    &:last-child {
+      padding: 0px 0px 0px 10px;
+      @include media(380px) {
+        & {
+          padding-top: 12px;
+        }
+      }
+    }
+    button {
+      height: 50px;
+      width: 50px;
+      .mat-icon {
+        font-size: 30px;
+      }
+    }
+    ion-text {
+      p {
+        margin: 0px;
+        font-size: 18px;
+        font-weight: 700;
+        vertical-align: top;
+        span {
+          font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI,
+            Roboto, Helvetica Neue, Arial, sans-serif !important;
+        }
+        @include media(380px) {
+          & {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}

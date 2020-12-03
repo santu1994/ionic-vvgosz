@@ -1,0 +1,22 @@
+<ion-list>
+  <ion-item lines="full" button *ngIf="!address.is_default" (click)="DismissClick('default')">
+    <ion-icon name="checkbox-outline" slot="start" color="primary"></ion-icon>
+    <ion-label>
+      <h2>Set as default</h2>
+    </ion-label>
+  </ion-item>
+  <!-- Edit -->
+  <ion-item lines="full" button (click)="DismissClick('edit')">
+    <ion-icon name="create-outline" slot="start" color="primary"></ion-icon>
+    <ion-label>
+      <h2>Edit</h2>
+    </ion-label>
+  </ion-item>
+  <!-- Delete -->
+  <ion-item lines="none" button (click)="DismissClick('delete')">
+    <ion-icon name="trash-outline" slot="start" color="primary"></ion-icon>
+    <ion-label>
+      <h2>Delete</h2>
+    </ion-label>
+  </ion-item>
+</ion-list>

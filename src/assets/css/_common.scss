@@ -1,0 +1,150 @@
+* {
+  font-family: var(--ion-font-family);
+}
+
+ion-header ion-toolbar,
+ion-content {
+  --background: var(--ion-color-light);
+}
+
+// ------- Header -------------
+@for $index from 1 through 6 {
+  h#{$index} {
+    font-family: var(--ion-font-family) !important;
+  }
+}
+
+// ------- Height -------------
+.height-auto {
+  height: auto !important;
+}
+
+$height: 10;
+@while $height <= 100 {
+  .height-#{$height} {
+    height: percentage($height/100) !important;
+  }
+  $height: $height + 5;
+}
+
+// --------------- Margin -------------
+.m-auto {
+  margin: auto !important;
+}
+$margin-list: (m, m-l, m-r, m-t, m-b, m-h, m-v);
+@each $list in $margin-list {
+  $margin: 0;
+  @while $margin <= 100 {
+    .#{$list}-#{$margin} {
+      @if $list == "m" {
+        margin: $margin + px !important;
+      } @else if $list == "m-l" {
+        margin-left: $margin + px !important;
+      } @else if $list == "m-r" {
+        margin-right: $margin + px !important;
+      } @else if $list == "m-t" {
+        margin-top: $margin + px !important;
+      } @else if $list == "m-b" {
+        margin-bottom: $margin + px !important;
+      } @else if $list == "m-h" {
+        margin-left: $margin + px !important;
+        margin-right: $margin + px !important;
+      } @else if $list == "m-v" {
+        margin-top: $margin + px !important;
+        margin-bottom: $margin + px !important;
+      }
+      $margin: $margin + 5;
+    }
+  }
+}
+
+// --------------- Padding -------------
+$padding-list: (p, p-l, p-r, p-t, p-b, p-h, p-v);
+@each $list in $padding-list {
+  $padding: 0;
+  @while $padding <= 100 {
+    .#{$list}-#{$padding} {
+      @if $list == "p" {
+        padding: $padding + px !important;
+      } @else if $list == "p-l" {
+        padding-left: $padding + px !important;
+      } @else if $list == "p-r" {
+        padding-right: $padding + px !important;
+      } @else if $list == "p-t" {
+        padding-top: $padding + px !important;
+      } @else if $list == "p-b" {
+        padding-bottom: $padding + px !important;
+      } @else if $list == "p-h" {
+        padding-left: $padding + px !important;
+        padding-right: $padding + px !important;
+      } @else if $list == "p-v" {
+        padding-top: $padding + px !important;
+        padding-bottom: $padding + px !important;
+      }
+      $padding: $padding + 5;
+    }
+  }
+}
+
+// Text Align
+$align: (left, center, right);
+@each $var in $align {
+  .text-#{$var} {
+    text-align: $var !important;
+  }
+}
+
+// Position
+$position: (static, relative, fixed, absolute, sticky);
+@each $var in $position {
+  .p-#{$var} {
+    position: $var !important;
+  }
+}
+
+// Float
+$float: (left, right);
+@each $var in $float {
+  .float-#{$var} {
+    float: $var !important;
+  }
+}
+
+// Display
+$display: (
+  none,
+  inline,
+  inline-block,
+  block,
+  table,
+  table-cell,
+  table-row,
+  flex,
+  inline-flex
+);
+@each $var in $display {
+  .d-#{$var} {
+    display: $var !important;
+  }
+}
+
+// Font Weight
+$font-weight: 100;
+@while $font-weight <= 900 {
+  .font-weight-#{$font-weight} {
+    font-weight: $font-weight !important;
+  }
+  $font-weight: $font-weight + 100;
+}
+
+// Vertical Center
+.v-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.default-font {
+  font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
+    Helvetica Neue, Arial, sans-serif !important;
+}

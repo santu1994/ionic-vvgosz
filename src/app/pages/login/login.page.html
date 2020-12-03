@@ -1,0 +1,84 @@
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12">
+        <ion-img src="assets/images/login-{{ randomNumber }}.png"></ion-img>
+      </ion-col>
+      <ion-row class="ion-align-items-center content-body">
+        <!-- Title -->
+        <ion-col size="12">
+          <div class="text-center">
+            <ion-text class="title">
+              <h2>Welcome to </h2>
+              <h2 class="company-first"> Bid</h2>
+              <h2 class="company-surname"> Zone</h2>
+            </ion-text>
+          </div>
+        </ion-col>
+        <!-- Form -->
+        <ion-col size="12">
+          <form class="form-horizontal m-t-30" (ngSubmit)="onSubmit()" [formGroup]="loginForm" #form="ngForm">
+            <!-- Email -->
+            <mat-form-field class="form-field">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" type="email" formControlName="email">
+              <mat-error *ngIf="loginForm.controls['email'].invalid">
+                {{ validateInput("email") }}</mat-error>
+            </mat-form-field>
+
+            <!-- Password -->
+            <mat-form-field class="form-field">
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Password" [type]="passwordHide ? 'password' : 'text'"
+                formControlName="password">
+              <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide"
+                [attr.aria-pressed]="passwordHide">
+                <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="loginForm.controls['password'].invalid">
+                {{ validateInput("password") }}</mat-error>
+            </mat-form-field>
+
+            <!-- Submit Button -->
+            <ion-button expand="block" size="large" class="ion-focused sign-in" fill="outline" type="submit"
+              [disabled]="loading">
+              <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
+              <ng-container *ngIf="!loading">Sign in</ng-container>
+              <ion-ripple-effect></ion-ripple-effect>
+            </ion-button>
+          </form>
+        </ion-col>
+        <!-- Forgot Password -->
+        <ion-col size="12">
+          <ion-text color="medium" class="forgot-password" (click)="forgotPassword()">
+            <p>Forgot Password</p>
+          </ion-text>
+        </ion-col>
+        <!-- Register Text -->
+        <ion-col size="12">
+          <ion-text color="medium" class="register-text">
+            <h2><span>Don't have an account</span></h2>
+          </ion-text>
+        </ion-col>
+        <!-- Register Button -->
+        <ion-col size="12">
+          <ion-button expand="block" size="large" fill="outline" class="register-btn ion-focused" color="warning"
+            [routerLink]="['/register']">
+            register now
+            <ion-ripple-effect></ion-ripple-effect>
+          </ion-button>
+        </ion-col>
+        <!-- Footer -->
+        <ion-col size="12">
+          <ion-text color="medium" class="footer-tittle">
+            <p>By creating an account, you are agreeing to our
+              <span>
+                Terms of Service
+              </span>
+            </p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+  </ion-grid>
+</ion-content>

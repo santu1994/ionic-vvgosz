@@ -1,0 +1,122 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-card {
+  border-radius: 10px;
+  box-shadow: none;
+  &.profile-header {
+    --background: var(--ion-color-primary);
+    color: var(--ion-color-light);
+    margin: 0px;
+    border-radius: 0px;
+    ion-card-content {
+      padding: 20px;
+      ion-avatar {
+        margin: auto;
+        margin-bottom: 10px;
+        width: 94px;
+        height: 94px;
+        position: relative;
+        button {
+          position: absolute;
+          bottom: 0;
+          right: 0;
+          background-color: #ffffff;
+        }
+      }
+    }
+  }
+  ion-item {
+    &.input-field {
+      --padding-start: 0px;
+    }
+  }
+  &.transparent {
+    --background: transparent;
+    ion-button {
+      --box-shadow: 0px;
+      --background: transparent;
+      --color: var(--ion-color-primary);
+      font-size: 18px;
+      font-weight: 700;
+      --ripple-color: transparent;
+    }
+  }
+  &.list {
+    margin: 0px;
+    border-radius: 0px;
+    box-shadow: none;
+    ion-list {
+      padding-top: 0px;
+      padding-bottom: 0px;
+      ion-item {
+        --padding-start: 0px;
+        ion-label {
+          padding: 0px 10px;
+          margin: 5px 0px;
+          &:last-child {
+            --border-color: #ffffff;
+          }
+          ion-text {
+            ion-icon {
+              font-size: 22px;
+              vertical-align: middle;
+              color: var(--ion-color-primary);
+            }
+            p {
+              display: inline;
+              font-size: 16px;
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .form-field {
+  width: 100%;
+  .mat-input-element {
+    font-size: 18px;
+    color: #152a4cc7;
+    letter-spacing: 1px;
+    @include media(380px) {
+      & {
+        font-size: 17px;
+      }
+    }
+  }
+  mat-label {
+    font-size: 18px;
+    @include media(380px) {
+      & {
+        font-size: 14px;
+      }
+    }
+  }
+  mat-error {
+    font-size: 15px;
+    @include media(380px) {
+      & {
+        font-size: 12px;
+      }
+    }
+  }
+  .mat-form-field-underline {
+    height: 1px;
+    color: var(--ion-color-medium);
+  }
+  button.mat-icon-button {
+    font-size: 27px;
+    color: var(--ion-color-medium);
+    @include media(380px) {
+      & {
+        font-size: 24px;
+      }
+    }
+  }
+}

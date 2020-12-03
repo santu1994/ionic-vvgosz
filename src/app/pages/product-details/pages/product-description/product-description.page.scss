@@ -1,0 +1,45 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-card.product-detail {
+  box-shadow: none;
+  background: transparent;
+  ion-card-header {
+    padding: 0px 0px 10px 0px;
+    ion-card-title {
+      font-weight: 700;
+      @include media(380px) {
+        & {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  ion-card-content {
+    padding: 0px 0px 10px 0px;
+    ion-text {
+      p {
+        display: inline;
+        @include media(380px) {
+          & {
+            font-size: 12px;
+            line-height: 16px;
+          }
+        }
+        &.more {
+          color: var(--ion-color-primary);
+          font-weight: 700;
+          font-size: 15px;
+          @include media(380px) {
+            & {
+              font-size: 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

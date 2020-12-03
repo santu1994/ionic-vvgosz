@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar class="dark-header">
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-back-button defaultHref='' color="light" icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">My Address</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="address-content">
+  <ion-card class="add" (click)="addressModel()">
+    <ion-card-content class="ion-activatable ripple-parent">
+      <ion-text color="primary">
+        <ion-icon name="add"></ion-icon>
+        <p>Add a new address</p>
+      </ion-text>
+      <ion-ripple-effect></ion-ripple-effect>
+    </ion-card-content>
+  </ion-card>
+
+  <ng-container *ngIf="!loader">
+    <ion-card class="address" *ngFor="let item of address">
+      <ion-card-header>
+        <ion-card-title>
+          <ion-text color="dark">
+            <p>{{item.name}}</p>
+          </ion-text>
+          <ion-chip>
+            <ion-label>{{item.type==='H'? 'Home': 'Work'}}</ion-label>
+          </ion-chip>
+          <ion-chip color="success" *ngIf="item.is_default">
+            <ion-label>Default</ion-label>
+          </ion-chip>
+
+          <button mat-icon-button (click)="openMenu($event,item)">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+        <ion-text>
+          <p>
+            {{item.address}}
+            {{(item.city) ? ', '+ item.city : '' }}
+            {{(item.state)? ', '+ item.state : ''}}
+            {{(item.pin)? ' - '+ item.pin : ''}}
+          </p>
+        </ion-text>
+        <ion-text>
+          <ion-chip color="primary">
+            <ion-label>{{item.phone}}</ion-label>
+          </ion-chip>
+          <ion-chip color="primary" *ngIf="item.alter_phone">
+            <ion-label>{{item.alter_phone}}</ion-label>
+          </ion-chip>
+        </ion-text>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+  <!-- Loader -->
+  <ng-container *ngIf="loader">
+    <ion-card class="address" *ngFor="let item of [0,1]">
+      <ion-card-content class="p-0">
+        <ion-skeleton-text animated style="height: 150px" class="m-0"></ion-skeleton-text>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+
+
+
+</ion-content>

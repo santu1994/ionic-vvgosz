@@ -1,0 +1,35 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-content.product-details {
+  ion-card {
+    &.product-info {
+      box-shadow: none;
+      background: transparent;
+      margin: 0px;
+      margin-top: -35px !important;
+    }
+  }
+}
+
+ion-footer {
+  &.product-footer {
+    ion-toolbar {
+      --background: var(--ion-color-light);
+      --padding-start: 25px;
+      --padding-end: 25px;
+      ion-button {
+        font-weight: 700;
+        font-size: 16px;
+        @include media(380px) {
+          & {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}

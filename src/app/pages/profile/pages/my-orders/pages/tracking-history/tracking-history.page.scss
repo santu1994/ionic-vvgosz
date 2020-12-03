@@ -1,0 +1,214 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-content.tracking-history {
+  ion-card {
+    &.product {
+      border-radius: 10px;
+      box-shadow: none;
+      margin: 15px 10px 10px 10px;
+      ion-card-content {
+        @include media(380px) {
+          & {
+            padding-top: 4px;
+            padding-bottom: 4px;
+          }
+        }
+        ion-grid {
+          padding: 0px;
+          ion-col {
+            padding-right: 5px;
+            div.image {
+              height: 95px;
+              ion-img {
+                height: inherit;
+                margin: auto !important;
+                display: block;
+              }
+            }
+            ion-text {
+              h4 {
+                font-weight: 700;
+                font-size: 17px;
+                margin: 0px;
+                @include media(380px) {
+                  & {
+                    font-size: 14px;
+                  }
+                }
+              }
+              &.price {
+                h3 {
+                  font-weight: 700;
+                  font-size: 20px;
+                  margin: 0px;
+                  margin-right: 10px;
+                  display: inline;
+                  @include media(380px) {
+                    & {
+                      font-size: 16px;
+                    }
+                  }
+                }
+                h4 {
+                  display: inline;
+                  color: var(--ion-color-medium);
+                  margin-right: 10px;
+                  text-decoration: line-through;
+                }
+                h5 {
+                  display: inline;
+                  color: var(--ion-color-medium);
+                  margin-right: 10px;
+                }
+                ion-badge {
+                  vertical-align: middle;
+                }
+              }
+            }
+          }
+        }
+        &.delivery-address {
+          .header {
+            ion-text {
+              p {
+                font-size: 17px;
+                display: inline;
+              }
+            }
+          }
+        }
+      }
+      ion-item {
+        --background: aliceblue;
+        ion-icon {
+          margin-inline-end: 9px;
+        }
+      }
+    }
+  }
+}
+
+.tl-item {
+  .avatar {
+    z-index: 2;
+    z-index: 2;
+  }
+  border-radius: 3px;
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  > * {
+    padding: 10px;
+  }
+  &:last-child {
+    .tl-dot {
+      &:after {
+        display: none;
+        display: none;
+      }
+    }
+  }
+}
+.timeline {
+  position: relative;
+  border-color: rgba(160, 175, 185, 0.15);
+  padding: 0;
+  margin: 0;
+}
+.tl-item.active {
+  .tl-dot {
+    &:before {
+      border-color: #4db6ac;
+      box-shadow: 0 0 0 4px rgba(68, 139, 255, 0.2);
+      border-color: #4db6ac;
+      box-shadow: 0 0 0 4px rgba(68, 139, 255, 0.2);
+      border-color: #4db6ac;
+      box-shadow: 0 0 0 4px rgba(68, 139, 255, 0.2);
+    }
+  }
+}
+.tl-dot {
+  position: relative;
+  border-color: rgba(160, 175, 185, 0.15);
+  position: relative;
+  border-color: teal;
+  &:after {
+    content: "";
+    position: absolute;
+    border-color: inherit;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: auto;
+    top: 25px;
+    bottom: -15px;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-radius: 0;
+    content: "";
+    position: absolute;
+    border-color: inherit;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: auto;
+    top: 25px;
+    bottom: -15px;
+    border-right-width: 0;
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-radius: 0;
+  }
+  &:before {
+    content: "";
+    position: absolute;
+    border-color: inherit;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+    content: "";
+    position: absolute;
+    border-color: inherit;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    top: 15px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+.tl-content {
+  p {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}
+.tl-date {
+  font-size: 0.85em;
+  margin-top: 2px;
+}

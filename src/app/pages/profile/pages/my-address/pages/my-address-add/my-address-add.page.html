@@ -1,0 +1,110 @@
+<ion-header>
+  <ion-toolbar class="dark-header">
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-back-button defaultHref='' color="light" icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">{{address ? 'Edit': 'Add'}} Address</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="address-content">
+  <form class="form" [formGroup]="addressForm" (ngSubmit)="onSubmit()">
+    <!-- Address -->
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <!-- Pin code -->
+            <mat-form-field class="form-field">
+              <mat-label>Pin code</mat-label>
+              <input matInput placeholder="Pin code" formControlName="pin" />
+              <mat-error *ngIf="addressForm.controls['pin'].invalid">{{ formValidateInput("pin") }} </mat-error>
+            </mat-form-field>
+            <!-- Address -->
+            <mat-form-field class="form-field">
+              <mat-label>Address</mat-label>
+              <textarea matInput placeholder="Address" rows="3" formControlName="address"></textarea>
+              <mat-error *ngIf="addressForm.controls['address'].invalid">{{ formValidateInput("address") }} </mat-error>
+            </mat-form-field>
+          </ion-col>
+
+          <ion-col size="6">
+            <!-- City -->
+            <mat-form-field class="form-field">
+              <mat-label>City</mat-label>
+              <input matInput placeholder="City/District/Town" formControlName="city" />
+              <mat-error *ngIf="addressForm.controls['city'].invalid">{{ formValidateInput("city") }}</mat-error>
+            </mat-form-field>
+          </ion-col>
+
+          <ion-col size="6">
+            <!-- State -->
+            <mat-form-field class="form-field">
+              <mat-label>State</mat-label>
+              <input matInput placeholder="State" formControlName="state" />
+              <mat-error *ngIf="addressForm.controls['state'].invalid">{{ formValidateInput("state") }} </mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <!-- Name -->
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <!-- Name -->
+            <mat-form-field class="form-field">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Name" formControlName="name" />
+              <mat-error *ngIf="addressForm.controls['name'].invalid">{{ formValidateInput("name") }} </mat-error>
+            </mat-form-field>
+            <!-- Mobile Number -->
+            <mat-form-field class="form-field">
+              <mat-label>Mobile Number</mat-label>
+              <input matInput placeholder="Mobile Number" formControlName="phone" />
+              <mat-error *ngIf="addressForm.controls['phone'].invalid">{{ formValidateInput("phone") }} </mat-error>
+            </mat-form-field>
+            <!-- Alternate Phone Number (Optional) -->
+            <mat-form-field class="form-field">
+              <mat-label> Alternate Phone Number</mat-label>
+              <input matInput placeholder="Alternate Phone Number" formControlName="alter_phone" />
+              <mat-error *ngIf="addressForm.controls['alter_phone'].invalid">{{ formValidateInput("alter_phone") }}
+              </mat-error>
+            </mat-form-field>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <!-- Address Type -->
+    <ion-card>
+      <ion-list>
+        <ion-radio-group formControlName="type">
+          <ion-list-header>
+            <ion-label color="medium">Address Type</ion-label>
+          </ion-list-header>
+
+          <ion-item lines="none" class="input-field">
+            <ion-label>Home Address</ion-label>
+            <ion-radio value="H" slot="start"></ion-radio>
+          </ion-item>
+
+          <ion-item lines="none" class="input-field">
+            <ion-label>Office/Work Address</ion-label>
+            <ion-radio value="W" slot="start"></ion-radio>
+          </ion-item>
+
+        </ion-radio-group>
+      </ion-list>
+    </ion-card>
+
+    <ion-card class="transparent">
+      <ion-button expand="block" type="submit" [disabled]="loading">
+        <ion-spinner name="dots" *ngIf="loading"></ion-spinner>
+        <ng-container *ngIf="!loading">Save</ng-container>
+      </ion-button>
+    </ion-card>
+  </form>
+</ion-content>

@@ -1,0 +1,29 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-list {
+  padding: 0px;
+  ion-item {
+    ion-icon {
+      margin-inline-end: 12px;
+      @include media(380px) {
+        & {
+          font-size: 22px;
+        }
+      }
+    }
+    ion-label {
+      h2 {
+        margin: 0px;
+        @include media(380px) {
+          & {
+            font-size: 17px;
+          }
+        }
+      }
+    }
+  }
+}

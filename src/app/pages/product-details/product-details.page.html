@@ -1,0 +1,114 @@
+<ion-header class="ion-no-border">
+  <ion-toolbar>
+    <!-- Top Bar -->
+    <app-header [headerData]="headerData"></app-header>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="product-details">
+  <ng-container *ngIf="!isLoadingResults">
+    <!-- Product Slider -->
+    <app-product-slider [productInfo]="productInfo" [adminInfo]="adminInfo"
+      (counterStatus)="changedCounterStatus($event)"></app-product-slider>
+    <ion-card class="product-info">
+      <ion-card-content class="p-t-0">
+        <!-- Details -->
+        <app-product-description [productInfo]="productInfo" [adminInfo]="adminInfo"></app-product-description>
+        <!-- More Details -->
+        <app-product-more-info [productInfo]="productInfo" [adminInfo]="adminInfo"></app-product-more-info>
+        <!-- Variant -->
+        <app-product-variant [productInfo]="productInfo"></app-product-variant>
+        <!-- Quantity -->
+        <app-product-quantity [productInfo]="productInfo"></app-product-quantity>
+        <!-- Live Auction -->
+        <app-product-live-auction [productInfo]="productInfo" [adminInfo]="adminInfo" [bidHistory]="bidHistory"
+          [counterSts]="counterStatus" (counterStatus)="changedCounterStatus($event)">
+        </app-product-live-auction>
+        <!-- Winner Auction -->
+        <app-product-winner [productInfo]="productInfo" [adminInfo]="adminInfo" [bidHistory]="bidHistory">
+        </app-product-winner>
+        <!-- Bid Timer -->
+        <app-product-bid-timer [productInfo]="productInfo"></app-product-bid-timer>
+        <!-- Auction -->
+        <app-product-auction-info [productInfo]="productInfo" [adminInfo]="adminInfo"></app-product-auction-info>
+        <!-- Bid History -->
+        <app-bid-history [productInfo]="productInfo" [adminInfo]="adminInfo" [bidHistory]="bidHistory"
+          [counterSts]="counterStatus"></app-bid-history>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+  <!-- loader -->
+  <ng-container *ngIf="isLoadingResults">
+    <ion-card>
+      <ion-card-content class="p-0">
+        <ion-skeleton-text animated style="height: 180px;" class="m-0"></ion-skeleton-text>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content class="p-0">
+        <ion-skeleton-text animated style="height: 130px;" class="m-0"></ion-skeleton-text>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content class="p-0">
+        <ion-skeleton-text animated style="height: 50px;" class="m-0"></ion-skeleton-text>
+      </ion-card-content>
+    </ion-card>
+    <ion-card>
+      <ion-card-content class="p-0">
+        <ion-skeleton-text animated style="height: 170px;" class="m-0"></ion-skeleton-text>
+      </ion-card-content>
+    </ion-card>
+  </ng-container>
+</ion-content>
+
+<ion-footer class="ion-no-border product-footer">
+  <ion-toolbar>
+    <ion-grid class="p-0">
+      <ion-row>
+        <ion-col size="6" class="p-0">
+          <ion-button expand="block" color="warning" (click)="closeModal()">Back</ion-button>
+        </ion-col>
+        <ion-col size="6" class="p-0" *ngIf="!isLoadingResults">
+          <!-- Bid Now -->
+          <ion-button expand="block" *ngIf="productInfo.status == 'live'" (click)="bid()" [disabled]="btnLoader">
+            <ion-spinner name="dots" *ngIf="btnLoader"></ion-spinner>
+            <ng-container *ngIf="!btnLoader">
+              Bid Now (
+              {{ adminInfo.currency.symbol}}
+              {{bidPoint}})
+            </ng-container>
+            <ion-ripple-effect></ion-ripple-effect>
+          </ion-button>
+
+          <ion-button expand="block"
+            *ngIf="(productInfo.status == 'upcoming' || productInfo.status == 'normal') && !productInfo.is_order">Buy
+            now
+          </ion-button>
+
+          <ng-container *ngIf="(productInfo.status === 'close') && !productInfo.is_order">
+            <ion-button expand="block" disabled color="medium" *ngIf="winner?.customer_id != customerInfo?._id">Sold out
+            </ion-button>
+
+            <!-- Pay Now Button -->
+            <ion-button expand="block"
+              *ngIf="(bidHistory.length > 0) && (winner?.customer_id === customerInfo?._id) &&!productInfo.is_order"
+              (click)="viewCheckoutModal()">
+              Pay now ({{ adminInfo.currency.symbol}} {{winner.price}})
+            </ion-button>
+          </ng-container>
+
+          <ng-container *ngIf="(productInfo.order_history.length > 0) && productInfo.is_order">
+            <!-- Sold Out -->
+            <ion-button expand="block" disabled color="medium"
+              *ngIf="productInfo.order_history[0].customer_id !== customerInfo?._id">Sold out</ion-button>
+
+            <!-- Tracking Button -->
+            <ion-button expand="block" *ngIf="productInfo.order_history[0].customer_id === customerInfo?._id">Tracking
+            </ion-button>
+          </ng-container>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-toolbar>
+</ion-footer>

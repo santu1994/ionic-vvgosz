@@ -1,0 +1,10 @@
+//  --------------- Sulphur Point ------------
+// $weight: 100;
+// @while $weight <= 900 {
+//   @font-face {
+//     font-family: "Sulphur Point";
+//     src: url("../fonts/SulphurPoint/SulphurPoint-bold.ttf");
+//     font-weight: $weight;
+//   }
+//   $weight: $weight + 100;
+// }

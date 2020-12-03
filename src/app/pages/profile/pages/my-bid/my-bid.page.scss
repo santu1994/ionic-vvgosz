@@ -1,0 +1,91 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-content.my-bid-product {
+  ion-card {
+    &.product {
+      border-radius: 10px;
+      box-shadow: none;
+      margin: 15px 10px 10px 10px;
+      ion-card-content {
+        @include media(380px) {
+          & {
+            padding-top: 4px;
+            padding-bottom: 4px;
+          }
+        }
+        ion-grid {
+          padding: 0px;
+          ion-col {
+            padding-right: 5px;
+            div {
+              height: 50px;
+              ion-img {
+                height: inherit;
+                margin: auto !important;
+                display: block;
+              }
+            }
+            ion-chip {
+              &.winner {
+                position: absolute;
+                top: 0;
+                left: -13px;
+                @include media(380px) {
+                  & {
+                    font-size: 11px;
+                    ion-icon {
+                      font-size: 15px;
+                    }
+                  }
+                }
+              }
+            }
+            ion-text {
+              h4 {
+                font-weight: 700;
+                font-size: 17px;
+                margin: 0px;
+                @include media(380px) {
+                  & {
+                    font-size: 14px;
+                  }
+                }
+              }
+              &.bid {
+                p {
+                  margin: 0px;
+                  font-size: 17px;
+                  font-weight: 700;
+                  mat-icon {
+                    vertical-align: top;
+                  }
+                }
+              }
+              &.price {
+                h3 {
+                  font-weight: 700;
+                  font-size: 20px;
+                  margin: 0px;
+                  display: inline;
+                  @include media(380px) {
+                    & {
+                      font-size: 16px;
+                    }
+                  }
+                  span {
+                    font-weight: 500;
+                    font-size: 17px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

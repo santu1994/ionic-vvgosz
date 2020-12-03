@@ -1,0 +1,69 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+
+ion-card.product-bid-history {
+  box-shadow: none;
+  background: transparent;
+  ion-card-header {
+    padding: 5px;
+    ion-text {
+      p {
+        margin: 0px;
+        font-weight: 700;
+        display: inline;
+        font-size: 20px;
+        ion-icon {
+          float: right;
+        }
+        @include media(380px) {
+          & {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
+  ion-card-content {
+    padding: 0px;
+    ion-list {
+      background: transparent;
+      padding: 0px;
+      ion-item {
+        --background: transparent;
+        --padding-start: 0px;
+        --inner-padding-end: 0px;
+        ion-avatar {
+          margin-top: 0px;
+          margin-bottom: 0px;
+        }
+        ion-label {
+          margin: 0px;
+          &.price {
+            font-family: Open Sans, -apple-system, BlinkMacSystemFont, Segoe UI,
+              Roboto, Helvetica Neue, Arial, sans-serif !important;
+          }
+          h2 {
+            margin: 0px;
+            @include media(380px) {
+              & {
+                font-size: 14px;
+              }
+            }
+          }
+          p {
+            margin: 0px;
+            color: var(--ion-color-medium);
+            @include media(380px) {
+              & {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

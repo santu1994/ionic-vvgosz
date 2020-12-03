@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar class="dark-header">
+    <ion-buttons slot="start" (click)="closeModal()">
+      <ion-back-button defaultHref='' color="light" icon="close"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="light">Edit Profile</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card class="profile-header">
+    <ion-card-content>
+      <ion-avatar>
+        <img src="assets/images/avatar2.png" *ngIf="!customerInfo.image && !previewImage">
+        <img [src]="baseUrl +'/'+customerInfo._id+'/'+ customerInfo.image" *ngIf="customerInfo.image && !previewImage">
+        <img [src]="previewImage" *ngIf="previewImage">
+        <button mat-mini-fab (click)="selectImage()">
+          <mat-icon color="primary">create</mat-icon>
+        </button>
+      </ion-avatar>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Edit -->
+  <form class="form" [formGroup]="personalInfoForm" (ngSubmit)="onSubmit()">
+    <ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col size="12">
+            <!-- Name -->
+            <mat-form-field class="form-field m-b-5">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Name" formControlName="name" />
+              <mat-error *ngIf="personalInfoForm.controls['name'].invalid">{{ personalFormValidateInput("name") }}
+              </mat-error>
+            </mat-form-field>
+            <!-- Email -->
+            <mat-form-field class="form-field">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" formControlName="email" />
+              <mat-error *ngIf="personalInfoForm.controls['email'].invalid">{{ personalFormValidateInput("email") }}
+              </mat-error>
+            </mat-form-field>
+            <!-- Mobile -->
+            <mat-form-field class="form-field">
+              <mat-label>Mobile Number</mat-label>
+              <input matInput placeholder="Mobile Number" formControlName="ph_number" />
+              <mat-error *ngIf="personalInfoForm.controls['ph_number'].invalid">
+                {{ personalFormValidateInput("ph_number") }}
+              </mat-error>
+            </mat-form-field>
+
+            <!-- DOB -->
+            <mat-form-field class="form-field" (click)="picker.open()">
+              <mat-label>DOB</mat-label>
+              <input matInput [matDatepicker]="picker" formControlName="dob" placeholder="DD/MM/YYYY" [max]="maxDate"
+                readonly />
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker touchUi #picker></mat-datepicker>
+              <mat-error *ngIf="personalInfoForm.controls['dob'].invalid">{{ personalFormValidateInput("dob") }}
+              </mat-error>
+            </mat-form-field>
+
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <ion-card class="transparent">
+      <ion-button expand="full" type="submit" [disabled]="loading">
+        <ion-spinner name="dots" *ngIf="loading" color="primary"></ion-spinner>
+        <ng-container *ngIf="!loading">Save</ng-container>
+      </ion-button>
+    </ion-card>
+  </form>
+
+  <!-- list -->
+  <ion-card class="list">
+    <ion-list>
+      <ion-item class="ion-activatable ripple-parent" (click)="changePasswordModel()">
+        <ion-label>
+          <ion-text>
+            <ion-icon name="key-outline"></ion-icon>
+            <p>Change Password</p>
+          </ion-text>
+        </ion-label>
+        <ion-ripple-effect></ion-ripple-effect>
+      </ion-item>
+      <ion-item class="ion-activatable ripple-parent" (click)="deactivateAccount()">
+        <ion-label>
+          <ion-text>
+            <ion-icon name="exit-outline"></ion-icon>
+            <p>Deactivate Account</p>
+          </ion-text>
+        </ion-label>
+        <ion-ripple-effect></ion-ripple-effect>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+
+</ion-content>

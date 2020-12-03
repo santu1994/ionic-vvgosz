@@ -1,0 +1,99 @@
+<ion-content>
+  <ion-grid>
+    <ion-row class="ion-align-items-center">
+      <ion-col size="12">
+        <ion-img src="assets/images/login-{{ randomNumber }}.png"></ion-img>
+      </ion-col>
+      <ion-row class="ion-align-items-center content-body">
+        <!-- Title -->
+        <ion-col size="12">
+          <div class="text-center">
+            <ion-text class="title">
+              <h2>Welcome to </h2>
+              <h2 class="company-first"> Bid</h2>
+              <h2 class="company-surname"> Zone</h2>
+            </ion-text>
+          </div>
+        </ion-col>
+        <!-- Form -->
+        <ion-col size="12">
+          <form class="form-horizontal m-t-30" (ngSubmit)="onRegistrationSubmit()" [formGroup]="registrationForm">
+            <!-- Name -->
+            <mat-form-field class="form-field">
+              <mat-label>Name</mat-label>
+              <input matInput placeholder="Name" type="text" formControlName="name">
+              <mat-error *ngIf="registrationForm.controls['name'].invalid">
+                {{ registrationValidateInput("name") }}</mat-error>
+            </mat-form-field>
+
+            <!-- Email -->
+            <mat-form-field class="form-field">
+              <mat-label>Email</mat-label>
+              <input matInput placeholder="Email" type="email" formControlName="email">
+              <mat-error *ngIf="registrationForm.controls['email'].invalid">
+                {{ registrationValidateInput("email") }}</mat-error>
+            </mat-form-field>
+
+            <!-- Password -->
+            <mat-form-field class="form-field">
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="Password" [type]="passwordHide ? 'password' : 'text'"
+                formControlName="password">
+              <button mat-icon-button matSuffix (click)="passwordHide = !passwordHide"
+                [attr.aria-pressed]="passwordHide">
+                <mat-icon>{{passwordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="registrationForm.controls['password'].invalid">
+                {{ registrationValidateInput("password") }}</mat-error>
+            </mat-form-field>
+
+            <!-- Confirm Password -->
+            <mat-form-field class="form-field">
+              <mat-label>Confirm Password</mat-label>
+              <input matInput placeholder="Confirm Password" [type]="confirmPasswordHide ? 'password' : 'text'"
+                formControlName="confirm_password">
+              <button mat-icon-button matSuffix (click)="confirmPasswordHide = !confirmPasswordHide"
+                [attr.aria-pressed]="confirmPasswordHide">
+                <mat-icon>{{confirmPasswordHide ? 'visibility_off' : 'visibility'}}</mat-icon>
+              </button>
+              <mat-error *ngIf="registrationForm.controls['confirm_password'].invalid">
+                {{ registrationValidateInput("confirm_password") }}</mat-error>
+            </mat-form-field>
+
+            <!-- Submit Button -->
+            <ion-button expand="block" size="large" fill="outline" class="register-btn ion-focused" color="warning"
+              type="submit" [disabled]="loading">
+              <ion-spinner name="dots" *ngIf="loading" color="warning"></ion-spinner>
+              <ng-container *ngIf="!loading">register now</ng-container>
+              <ion-ripple-effect></ion-ripple-effect>
+            </ion-button>
+          </form>
+        </ion-col>
+
+        <!-- Register Text -->
+        <ion-col size="12">
+          <ion-text color="medium" class="register-text">
+            <h2><span>have an account</span></h2>
+          </ion-text>
+        </ion-col>
+        <!-- Register Button -->
+        <ion-col size="12">
+          <ion-button expand="block" size="large" class="ion-focused sign-in" fill="outline" [routerLink]="['/login']">
+            sign in
+            <ion-ripple-effect></ion-ripple-effect>
+          </ion-button>
+        </ion-col>
+        <!-- Footer -->
+        <ion-col size="12">
+          <ion-text color="medium" class="footer-tittle">
+            <p class="m-0">By creating an account, you are agreeing to our
+              <span>
+                Terms of Service
+              </span>
+            </p>
+          </ion-text>
+        </ion-col>
+      </ion-row>
+    </ion-row>
+  </ion-grid>
+</ion-content>

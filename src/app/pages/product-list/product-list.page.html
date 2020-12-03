@@ -1,0 +1,161 @@
+<!-- Product -->
+<ion-list *ngIf="product">
+  <ion-item lines="none" class="ion-no-padding" (click)="viewProductDetailsModal(product)">
+    <ion-card class="product-card">
+      <mat-chip-list>
+        <mat-chip color="primary" selected *ngIf="product.is_charity">CHARITY</mat-chip>
+        <mat-chip color="accent" selected *ngIf="product.featured">FEATURED</mat-chip>
+        <mat-chip color="warn" selected *ngIf="product.hot_sale">HOT</mat-chip>
+      </mat-chip-list>
+      <!-- Price Discount -->
+      <mat-chip color="accent" class="price-discount" selected *ngIf="product.offer_price">
+        {{ product.discount_type == 'P' ? '' : '-' }}
+        {{ product.offer_price }}
+        {{ product.discount_type == 'P' ? '%' : '' }}
+      </mat-chip>
+
+      <ion-slides pager="true" [options]="slideOpts">
+        <ion-slide *ngFor="let images of product.images">
+          <img [defaultImage]="'assets/images/bidzone-loader-img.png'"
+            [lazyLoad]="baseUrl +'uploads/images/product/'+ product._id +'/'+ images " />
+        </ion-slide>
+      </ion-slides>
+      <ion-card-header>
+        <ion-card-title class="product-title" color="primary"> {{ product.name | truncate:[50]}}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+
+        <!-- Bid -->
+        <button mat-fab color="accent" class="product-bid-btn" *ngIf="product.status === 'live'">
+          <ion-icon name="hammer-outline"></ion-icon>
+        </button>
+
+        <!-- Cart -->
+        <button mat-fab color="primary" class="product-bid-btn"
+          *ngIf="product.status === 'normal' || product.status === 'upcoming'" (click)="buyNow(product)">
+          <ion-icon name="cart-outline"></ion-icon>
+        </button>
+
+        <ion-grid class="p-h-0">
+          <ion-row>
+            <!-- Product Description -->
+            <ion-col size="12" class="p-0">
+              <ion-text>
+                <p class="m-b-5">{{ product.short_description | truncate:[100]}}</p>
+              </ion-text>
+              <!-- Variant -->
+              <ion-chip color="primary" *ngFor="let variant of product.variant">
+                <ion-label>{{  variant.slug  }}</ion-label>
+              </ion-chip>
+            </ion-col>
+
+            <ion-col size="6">
+              <!-- All Product  and Upcoming Price -->
+              <ion-text color="dark" class="product-price"
+                *ngIf="product.status === 'normal' || product.status === 'upcoming'">
+                <h2 *ngIf="product.offer_price">
+                  {{ adminInfo.currency.symbol}}
+                  {{ product.price | calPercentageFlat: [product.offer_price, product.discount_type] }}</h2>
+                <h2 class="offer" *ngIf="product.offer_price">
+                  {{ product.price}}
+                </h2>
+                <h2 *ngIf="!product.offer_price">
+                  {{ adminInfo.currency.symbol}}
+                  {{ product.price }}
+                </h2>
+              </ion-text>
+              <!-- Live Price -->
+              <ion-text color="dark" class="product-price" *ngIf="product.status === 'live'">
+                <h2>
+                  {{ adminInfo.currency.symbol}}
+                  {{ currentBidPrice(product)}}
+                </h2>
+              </ion-text>
+
+              <!-- Closed Price -->
+              <ion-text color="dark" class="product-price" *ngIf="product.status === 'close'">
+                <h2 *ngIf="product.bid_info.length > 0">
+                  {{ adminInfo.currency.symbol}}
+                  {{ currentBidInfo(product).price}}
+                </h2>
+              </ion-text>
+
+              <ion-text color="medium" class="product-status">
+                <p *ngIf="product.status === 'normal' || product.status === 'upcoming'">Current Price</p>
+                <p *ngIf="product.status === 'live'">Current Bid Price</p>
+                <p *ngIf="product.status === 'close' && product.bid_info.length > 0">Auction Price</p>
+              </ion-text>
+
+              <ng-container *ngIf="product.status === 'live'">
+                <a class="intro-banner-vdo-play-btn pinkBg">
+                  <span class="ripple pinkBg"></span>
+                  <span class="ripple pinkBg"></span>
+                  <span class="ripple pinkBg"></span>
+                </a>
+                <ion-text color="primary" class="live">
+                  <p>Live</p>
+                </ion-text>
+              </ng-container>
+
+            </ion-col>
+
+            <ion-col size="6" class="v-center" *ngIf="product.auction">
+              <!-- Timeline -->
+              <ng-container *ngIf="product.status === 'upcoming'">
+                <ion-text class="upcoming" color="primary">
+                  <p> Auction Started On</p>
+                  <p>{{getTimeZoneConvert(product.auction.start_date) | date:'dd LLL yyyy HH:mm'}}</p>
+                </ion-text>
+                <ion-badge color="warning" class="product-duration d-none">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <h3>
+                    <countdown
+                      [config]="{leftTime: product.auction.left_date, formatDate: moreThan24Hours.formatDate, notify: 0}"
+                      (event)="counterEvent($event,product)">
+                    </countdown>
+                  </h3>
+                </ion-badge>
+              </ng-container>
+
+              <!-- Live -->
+              <ng-container *ngIf="product.status === 'live'">
+                <ion-badge color="warning" class="product-duration ">
+                  <ion-icon name="time-outline"></ion-icon>
+                  <h3>
+                    <countdown
+                      [config]="{leftTime: product.auction.left_date, formatDate: moreThan24Hours.formatDate, notify: 0}"
+                      (event)="counterEvent($event,product)" #countdown>
+                    </countdown>
+                  </h3>
+                </ion-badge>
+
+              </ng-container>
+
+              <!-- Closed -->
+              <ng-container *ngIf="product.status === 'close'">
+                <ion-text color="danger" class="closed">
+                  <p>Auction Ended</p>
+                  <p class="winier" *ngIf="product.bid_info.length > 0">
+                    <ion-icon name="person-circle-outline"></ion-icon>
+                    {{  currentBidInfo(product).customer_info.name  | truncate:[12]}}
+                  </p>
+                </ion-text>
+              </ng-container>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+</ion-list>
+
+<!-- Loader -->
+<ion-list *ngIf="!product">
+  <ion-item lines="none" class="ion-no-padding" *ngFor="let item of [0,1,2]">
+    <ion-card class="product-card">
+      <ion-card-content class="ion-no-padding">
+        <ion-skeleton-text animated class="m-0" style="height: 200px;"></ion-skeleton-text>
+      </ion-card-content>
+    </ion-card>
+  </ion-item>
+</ion-list>

@@ -1,0 +1,52 @@
+@mixin media($width) {
+  @media screen and (max-width: $width) {
+    @content;
+  }
+}
+// header Title
+ion-title.header-bar {
+  background: #084b44;
+  padding-left: 0px;
+  padding-right: 0px;
+  ion-img {
+    &.brand-name {
+      margin-top: 10px;
+    }
+  }
+  .cart {
+    ion-img {
+      position: relative;
+    }
+    ion-badge {
+      position: absolute;
+      right: 0px;
+      top: 0px;
+    }
+  }
+  div.bid-score {
+    text-align: right;
+    ion-badge {
+      font-weight: 700;
+      font-size: 21px;
+      padding: 5px 10px 5px 10px;
+      margin-top: 10px;
+      @include media(380px) {
+        & {
+          font-size: 14px;
+        }
+      }
+      &:first-child {
+        border-radius: 10px 0px 0px 10px;
+      }
+      &:last-child {
+        border-radius: 0px 10px 10px 0px;
+      }
+      &.loader-badge {
+        padding: 0 5px;
+        ion-spinner {
+          height: 26px;
+        }
+      }
+    }
+  }
+}
